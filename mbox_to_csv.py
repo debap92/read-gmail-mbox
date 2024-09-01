@@ -50,7 +50,9 @@ class MboxToCSV:
             lambda x: re.findall(r"<(.*?)>", x) if "<" in x else x
         )
         df.dropna(subset=["From"], inplace=True)
-        pd.to_datetime(df["Date"], format='mixed', cache=True, errors="coerce", utc=True).dt.strftime("%y-%m-%d"
+        pd.to_datetime(
+            df["Date"], format="mixed", cache=True, errors="coerce", utc=True
+        ).dt.strftime("%y-%m-%d")
         # self.transform_date(df) # In Future implementation for more roboust approach
         # TODO: create sheet for inbox and send and other instead 1
         df.to_csv(opname, index=False)
